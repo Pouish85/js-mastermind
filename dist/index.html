@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastermind</title>
+<script defer src="main.bundle.js"></script></head>
+<body>
+    <div class="gameContainer">
+        <h1>Mastermind</h1>
+        <div class="hiddenCombinaison">
+            <button class="colors place1" id="black"></button>
+            <button class="colors place2" id="black"></button>
+            <button class="colors place3" id="black"></button>
+            <button class="colors place4" id="black"></button>
+        </div>
+        <div class="status">Tentative 1 / 10</div>
+        <div class="attemptsContainer">
+            <div class="attempt1 row">
+                <button class="number" id="black">1</button>
+                <buton class="colors one" id="white"></buton>
+                <buton class="colors two" id="white"></buton>
+                <buton class="colors three" id="white"></buton>
+                <buton class="colors four" id="white"></buton>
+                <div class="results1 square">
+                    <button class="resultsColors one" id=""></button>
+                    <button class="resultsColors two" id=""></button>
+                    <button class="resultsColors three" id=""></button>
+                    <button class="resultsColors four" id=""></button>
+                </div>
+            </div>
+        </div>
+        <div id="currentAttempt" class="row">
+            <div class="currentText" id="black">Combinaison en cours</div>
+            <button class="colors one" id="white"></button>
+            <button class="colors two" id="white"></button>
+            <button class="colors three" id="white"></button>
+            <button class="colors four" id="white"></button>
+        </div>
+        <div id="colorBtn">
+            <button class="colors" id=""></button>
+            <button class="colors" id=""></button>
+            <button class="colors" id=""></button>
+            <button class="colors" id=""></button>
+            <button class="colors" id=""></button>
+            <button class="colors" id=""></button>
+        </div>
+        <div class="btn">
+            <button id="cancelBtn">Annuler</button>
+            <button id="submitBtn">Valider</button>
+        </div>
+    </div>
+</body>
+</html>

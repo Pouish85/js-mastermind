@@ -1,0 +1,109 @@
+.gameContainer {
+    width: 500px;
+    height: 1270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    background-color: $board-color;
+    border-radius: 10px;
+    border-bottom: 3px solid black;
+
+    h1{
+        font-size: 70px;
+        margin-bottom: 25px;
+    }
+
+    .hiddenCombinaison {
+        margin-bottom: 15px;
+
+        .colors {
+            width: 70px;
+            height: 70px;
+            transform: translateX(15px);
+        }
+    }
+
+    .status {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .attemptsContainer {
+        display: flex;
+        flex-direction: column;
+        transform: translateX(25px);
+
+        .number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            transform: translateX(-30px);
+        }
+
+        .square {
+            height: 50px;
+            width: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 10px;
+
+            .resultsColors {
+                height: 18px;
+                width: 18px;
+                border-radius: 50%;
+                background-color: transparent;
+            }
+            
+        }
+    }
+    
+    #currentAttempt {
+        transform: translateX(-28px);
+        text-align: center;
+    
+        .currentText {
+            width: 100px;
+            height: 40px;
+            border-radius: 10px;
+            margin-right: 15px;
+        
+        }
+    }
+
+    #colorBtn {
+        margin-top: 25px;
+        transform: translateX(10px);
+
+        .colors{
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    .btn {
+        @include flex;
+
+        #cancelBtn, #submitBtn {
+            width: 100px;
+            height: 25px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 10px;
+            border-bottom: 1 px solid black;
+            border-top: 1px solid white;
+        }
+
+        #cancelBtn {
+            margin-right: 10px;
+        }
+
+        #submitBtn {
+            margin-left: 10px;
+        }
+    }
+
+}
