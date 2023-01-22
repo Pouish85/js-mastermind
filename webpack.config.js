@@ -5,7 +5,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     // Point d'entree
     entry: {
-        main: path.join(__dirname, "src/index.js")
+        main: path.join(__dirname, "./src/assets/js/index.js"),
+        display: path.join(__dirname, "./src/assets/js/display.js")
     },
     // Point de sortie
     output: {
@@ -37,7 +38,9 @@ module.exports = {
         // il va nous permettre de recuperer le index.html et d'injecter directement le bundle, sans que l'on est a faire manuellement
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "src/index.html")
+            filename: 'index.html',
+            template: path.resolve(__dirname, "src/index.html"),
+            chunk:["main", "display"]
         })
     ],
     stats: "minimal",
