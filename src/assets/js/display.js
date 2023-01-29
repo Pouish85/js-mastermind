@@ -1,8 +1,12 @@
-//function for generating and displaying colors buttons
+
+// //function for generating and displaying colors buttons
 export function colorsButtonCreation(colorsList) {
     let colorsButtonHTML = colorsList.map(color =>
         `
-        <button class="colors" id="${color.name}"></button>
+        <button 
+        class="colors color-btn" 
+        id="${color.name}">
+        </button>
         `).join('');
         document.getElementById('colorBtn').innerHTML = colorsButtonHTML;
 }
@@ -36,11 +40,11 @@ export function attemptsRowsCreation(maxTries, currentAttempt) {
 }
 
 //function for gererating and displaying random combination row
-export function hiddenCombination(colorsList, hiddenComnationLength) {
+export function hiddenCombination(colorsList, hiddenCombinationLength) {
     //combination creation
     const colors = colorsList.map(color => color.name);
     const randomChoice = [];
-    for (let i = 0; i < hiddenComnationLength; i++) {
+    for (let i = 0; i < hiddenCombinationLength; i++) {
         let randomOneChoice = colors[Math.floor(Math.random() * colors.length)];
         randomChoice.push(randomOneChoice);
     }
@@ -53,14 +57,14 @@ export function hiddenCombination(colorsList, hiddenComnationLength) {
 } 
 
 //function for generating and displaying currentAttempt row
-export function currentAttemptDisp(currentAttempt, hiddenComnationLength) {
+export function currentAttemptDisp(currentAttempt, hiddenCombinationLength) {
     let currentAttemptArray = [];
     let currentAttemptTextHTML = '<div class="currentText" id="black">Combinaison en cours</div>'
-    for (let i = 1; i <= hiddenComnationLength; i++) {
+    for (let i = 1; i <= hiddenCombinationLength; i++) {
         currentAttemptArray.push(i);
     }
     let currentAttemptColorsHTML = currentAttemptArray.map(value =>`
-    <button class="colors ${value}" id="white"></button>
+    <button class="colors" id="white"></button>
     `).join('');
     let currentAttemptHTML= currentAttemptTextHTML.concat(currentAttemptColorsHTML);
     document.getElementById('currentAttempt').innerHTML = currentAttemptHTML;

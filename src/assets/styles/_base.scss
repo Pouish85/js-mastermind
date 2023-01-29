@@ -1,18 +1,19 @@
 @import './mixins';
 
 body {
-    display: flex;
-    justify-content: center;
-    
+
+    @include flex;
+
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    
     margin-bottom: 10px;
     padding-top: 8px;
     border-top: 1px solid white;
+
+    @include flex($justify: space-between);
+
 }
 
 .colors {
