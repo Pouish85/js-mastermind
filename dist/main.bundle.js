@@ -10,76 +10,75 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "attemptsRowsCreation": () => (/* binding */ attemptsRowsCreation),
-/* harmony export */   "colorsButtonCreation": () => (/* binding */ colorsButtonCreation),
-/* harmony export */   "currentAttemptDisp": () => (/* binding */ currentAttemptDisp),
-/* harmony export */   "hiddenCombination": () => (/* binding */ hiddenCombination)
+/* harmony export */   "boardCreation": () => (/* binding */ boardCreation)
 /* harmony export */ });
-// //function for generating and displaying colors buttons
-function colorsButtonCreation(colorsList) {
-  let colorsButtonHTML = colorsList.map(color => `
-        <button 
-        class="colors color-btn" 
-        id="${color.name}">
-        </button>
-        `).join('');
-  document.getElementById('colorBtn').innerHTML = colorsButtonHTML;
-}
-
-//function for generating and displaying all the attempts rows
-function attemptsRowsCreation(maxTries, currentAttempt) {
-  let i;
-  let arrayTries = [];
-  for (i = currentAttempt; i <= maxTries; i++) {
-    arrayTries.push(i);
+function boardCreation(colorsList, maxTries, currentAttempt, hiddenCombinationLength) {
+  // //function for generating and displaying colors buttons
+  function colorsButtonCreation(colorsList) {
+    let colorsButtonHTML = colorsList.map(color => `
+            <button 
+            class="colors color-btn" 
+            id="${color.name}">
+            </button>
+            `).join('');
+    document.getElementById('colorBtn').innerHTML = colorsButtonHTML;
   }
-  let attemptsRowHTML = arrayTries.map(value => `
-        <div class="attempt${value} row">
-                <button class="number" id="black">${value}</button>
-                <buton class="colors one" id="white"></buton>
-                <buton class="colors two" id="white"></buton>
-                <buton class="colors three" id="white"></buton>
-                <buton class="colors four" id="white"></buton>
-                <div class="results${value} square">
-                    <button class="resultsColors one" id=""></button>
-                    <button class="resultsColors two" id=""></button>
-                    <button class="resultsColors three" id=""></button>
-                    <button class="resultsColors four" id=""></button>
+
+  //function for generating and displaying all the attempts rows
+  function attemptsRowsCreation(maxTries, currentAttempt) {
+    let i;
+    let arrayTries = [];
+    for (i = currentAttempt; i <= maxTries; i++) {
+      arrayTries.push(i);
+    }
+    let attemptsRowHTML = arrayTries.map(value => `
+            <div class="attempt${value} row">
+                    <button class="number" id="black">${value}</button>
+                    <buton class="colors one" id="white"></buton>
+                    <buton class="colors two" id="white"></buton>
+                    <buton class="colors three" id="white"></buton>
+                    <buton class="colors four" id="white"></buton>
+                    <div class="results${value} square">
+                        <button class="resultsColors one" id=""></button>
+                        <button class="resultsColors two" id=""></button>
+                        <button class="resultsColors three" id=""></button>
+                        <button class="resultsColors four" id=""></button>
+                    </div>
                 </div>
-            </div>
-        
-        `).join('');
-  document.getElementById("attemptsContainer").innerHTML = attemptsRowHTML;
-}
-
-//function for gererating and displaying random combination row
-function hiddenCombination(colorsList, hiddenCombinationLength) {
-  //combination creation
-  const colors = colorsList.map(color => color.name);
-  const randomChoice = [];
-  for (let i = 0; i < hiddenCombinationLength; i++) {
-    let randomOneChoice = colors[Math.floor(Math.random() * colors.length)];
-    randomChoice.push(randomOneChoice);
+            
+            `).join('');
+    document.getElementById("attemptsContainer").innerHTML = attemptsRowHTML;
   }
-  //hidden combination row display without colors info for prevent cheating
-  let hiddenCombinationHTML = randomChoice.map(() => `
-        <button class="colors place1" id="black"></button>
-        `).join('');
-  document.getElementById('hiddenCombination').innerHTML = hiddenCombinationHTML;
-}
 
-//function for generating and displaying currentAttempt row
-function currentAttemptDisp(currentAttempt, hiddenCombinationLength) {
-  let currentAttemptArray = [];
-  let currentAttemptTextHTML = '<div class="currentText" id="black">Combinaison en cours</div>';
-  for (let i = 1; i <= hiddenCombinationLength; i++) {
-    currentAttemptArray.push(i);
+  //function for displaying random combination row without colors info for prevent cheating
+  function hiddenCombinationRow(hiddenCombinationLength) {
+    let hiddenCombinationArray = [];
+    for (let i = 1; i <= hiddenCombinationLength; i++) {
+      hiddenCombinationArray.push(i);
+    }
+    let hiddenCombinationHTML = hiddenCombinationArray.map(idx => `
+            <button class="colors place${idx}" id="black"></button>
+            `).join('');
+    document.getElementById('hiddenCombination').innerHTML = hiddenCombinationHTML;
   }
-  let currentAttemptColorsHTML = currentAttemptArray.map(value => `
-    <button class="colors" id="white"></button>
-    `).join('');
-  let currentAttemptHTML = currentAttemptTextHTML.concat(currentAttemptColorsHTML);
-  document.getElementById('currentAttempt').innerHTML = currentAttemptHTML;
+
+  //function for generating and displaying currentAttempt row
+  function currentAttemptDisp(currentAttempt, hiddenCombinationLength) {
+    let currentAttemptArray = [];
+    let currentAttemptTextHTML = '<div class="currentText" id="black">Combinaison en cours</div>';
+    for (let i = 1; i <= hiddenCombinationLength; i++) {
+      currentAttemptArray.push(i);
+    }
+    let currentAttemptColorsHTML = currentAttemptArray.map(value => `
+        <button class="colors" id="white"></button>
+        `).join('');
+    let currentAttemptHTML = currentAttemptTextHTML.concat(currentAttemptColorsHTML);
+    document.getElementById('currentAttempt').innerHTML = currentAttemptHTML;
+  }
+  colorsButtonCreation(colorsList);
+  attemptsRowsCreation(maxTries, currentAttempt);
+  hiddenCombinationRow(colorsList, hiddenCombinationLength);
+  currentAttemptDisp(currentAttempt, hiddenCombinationLength);
 }
 
 /***/ }),
@@ -675,9 +674,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 //Array of colors that will be used for the game
 const colorsList = [{
   name: "yellow"
@@ -696,6 +692,17 @@ const maxTries = 10;
 let currentAttempt = 1;
 const hiddenCombinationLength = 4;
 let combination = [];
+const randomChoice = [];
+function hiddenCombination() {
+  //combination creation
+  const colors = colorsList.map(color => color.name);
+  for (let i = 0; i < hiddenCombinationLength; i++) {
+    let randomOneChoice = colors[Math.floor(Math.random() * colors.length)];
+    randomChoice.push(randomOneChoice);
+  }
+  console.log(randomChoice);
+  return randomChoice;
+}
 
 //function for pushed colorsButtons be add in combination array
 function attempt() {
@@ -713,7 +720,7 @@ function attempt() {
   }
 
   //display of the current combination in th the currentAttempt row
-  function currentAttempt(combination) {
+  function currentAttempt() {
     let combinationHTML = document.querySelector("#currentAttempt");
     if (combination.length == 1) {
       let firstColor = combinationHTML.children[1];
@@ -731,10 +738,35 @@ function attempt() {
     }
   }
 }
-(0,_display_js__WEBPACK_IMPORTED_MODULE_1__.colorsButtonCreation)(colorsList);
-(0,_display_js__WEBPACK_IMPORTED_MODULE_1__.attemptsRowsCreation)(maxTries, currentAttempt);
-(0,_display_js__WEBPACK_IMPORTED_MODULE_1__.hiddenCombination)(colorsList, hiddenCombinationLength);
-(0,_display_js__WEBPACK_IMPORTED_MODULE_1__.currentAttemptDisp)(currentAttempt, hiddenCombinationLength);
+
+//function for cancel the current attempt before submit
+function cancel() {
+  combination = [];
+  const currentAttempt = document.getElementById("currentAttempt");
+  for (let i = 1; i < 5; i++) {
+    currentAttempt.children[i].id = "white";
+  }
+}
+
+//function for submitting the current combination
+function submit() {
+  //check if the combination is identical to the hidden one
+  if (combination.toString() === randomChoice.toString()) {
+    alert("Félicitation vous avez trouvé la bonne combinaison");
+  } else {
+    alert("Ce n'est pas la bonne combinaison, recommencez!");
+  }
+}
+const cancelBtn = document.getElementById("cancelBtn");
+cancelBtn.addEventListener('click', event => {
+  cancel();
+});
+const submitBtn = document.getElementById("submitBtn");
+submitBtn.addEventListener('click', event => {
+  submit();
+});
+hiddenCombination();
+(0,_display_js__WEBPACK_IMPORTED_MODULE_1__.boardCreation)(colorsList, maxTries, currentAttempt, hiddenCombinationLength);
 attempt();
 })();
 

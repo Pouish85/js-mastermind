@@ -1,10 +1,7 @@
 import '../styles/index.scss';
 import "./display.js";
 
-import {colorsButtonCreation} from "./display.js";
-import {attemptsRowsCreation} from "./display.js";
-import {hiddenCombination} from "./display.js";
-import {currentAttemptDisp} from "./display.js";
+import { boardCreation } from './display.js';
 
 //Array of colors that will be used for the game
 const colorsList = [ {name: "yellow"}, {name: "blue"}, {name: "red"}, {name: "green"}, {name: "orange"}, {name: "purple"}];
@@ -13,6 +10,19 @@ const maxTries = 10;
 let currentAttempt = 1;
 const hiddenCombinationLength = 4;
 let combination = [];
+const randomChoice = [];
+
+function hiddenCombination() {
+    //combination creation
+    const colors = colorsList.map(color => color.name);
+    for (let i = 0; i < hiddenCombinationLength; i++) {
+        let randomOneChoice = colors[Math.floor(Math.random() * colors.length)];
+        randomChoice.push(randomOneChoice);
+        
+    }
+    console.log(randomChoice);
+    return randomChoice;
+}
 
 
 //function for pushed colorsButtons be add in combination array
@@ -32,7 +42,7 @@ function attempt () {
     }
 
     //display of the current combination in th the currentAttempt row
-    function currentAttempt(combination) {
+    function currentAttempt() {
         let combinationHTML = document.querySelector("#currentAttempt");
         if (combination.length == 1) {
             let firstColor = combinationHTML.children[1];
@@ -51,9 +61,36 @@ function attempt () {
     }
 }
 
+//function for cancel the current attempt before submit
+function cancel() {
+    combination = [];
+    const currentAttempt = document.getElementById("currentAttempt");
+    for (let i = 1; i < 5; i++) {
+        currentAttempt.children[i].id = "white";
+    }
+}
 
-colorsButtonCreation(colorsList);
-attemptsRowsCreation(maxTries, currentAttempt);
-hiddenCombination(colorsList, hiddenCombinationLength);
-currentAttemptDisp(currentAttempt, hiddenCombinationLength);
+//function for submitting the current combination
+function submit() {
+    //check if the combination is identical to the hidden one
+    if (combination.toString() === randomChoice.toString()) {
+        alert("Félicitation vous avez trouvé la bonne combinaison")
+    } else {
+        alert("Ce n'est pas la bonne combinaison, recommencez!")
+    }
+}
+
+const cancelBtn = document.getElementById("cancelBtn");
+cancelBtn.addEventListener('click', event => {
+    cancel();
+})
+
+const submitBtn = document.getElementById("submitBtn");
+submitBtn.addEventListener('click', event => {
+    submit();
+})
+
+hiddenCombination();
+boardCreation(colorsList, maxTries, currentAttempt, hiddenCombinationLength)
 attempt();
+
