@@ -60,6 +60,15 @@ function attempt () {
     }
 }
 
+//function for saving previous combinations on the game board
+function savePreviousAttempts () {
+    const attempt = document.querySelector(`.attempt${currentAttempt}`);
+    attempt.children[1].id = combination[0];
+    attempt.children[2].id = combination[1];
+    attempt.children[3].id = combination[2];
+    attempt.children[4].id = combination[3];
+}
+
 //function for reset the current attempt, it can be used before or after submit
 function reset() {
     combination = [];
@@ -75,12 +84,14 @@ function submit() {
     if (combination.toString() === randomChoice.toString()) {
         alert(`Félicitation vous avez trouvé la bonne combinaison en ${currentAttempt} tentative${currentAttempt >= 2 ? "s" : ""}`)
     } else if (currentAttempt < maxTries) {
+        savePreviousAttempts();
         alert("Ce n'est pas la bonne combinaison, recommencez!")
         reset();
         currentAttempt += 1;
         updateTry();
     } else {
-        alert("Désolé, vous n'avez pas trouvé la bonne combinaison")
+        savePreviousAttempts();
+        alert("Désolé c'est perdu, vous n'avez pas trouvé la bonne combinaison")
     }
 }
 
