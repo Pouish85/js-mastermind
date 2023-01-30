@@ -693,8 +693,9 @@ let currentAttempt = 1;
 const hiddenCombinationLength = 4;
 let combination = [];
 const randomChoice = [];
+
+//hidden combination creation
 function hiddenCombination() {
-  //combination creation
   const colors = colorsList.map(color => color.name);
   for (let i = 0; i < hiddenCombinationLength; i++) {
     let randomOneChoice = colors[Math.floor(Math.random() * colors.length)];
@@ -739,8 +740,8 @@ function attempt() {
   }
 }
 
-//function for cancel the current attempt before submit
-function cancel() {
+//function for reset the current attempt, it can be used before or after submit
+function reset() {
   combination = [];
   const currentAttempt = document.getElementById("currentAttempt");
   for (let i = 1; i < 5; i++) {
@@ -752,14 +753,26 @@ function cancel() {
 function submit() {
   //check if the combination is identical to the hidden one
   if (combination.toString() === randomChoice.toString()) {
-    alert("Félicitation vous avez trouvé la bonne combinaison");
-  } else {
+    alert(`Félicitation vous avez trouvé la bonne combinaison en ${currentAttempt} tentative${currentAttempt >= 2 ? "s" : ""}`);
+  } else if (currentAttempt < maxTries) {
     alert("Ce n'est pas la bonne combinaison, recommencez!");
+    reset();
+    currentAttempt += 1;
+    updateTry();
+  } else {
+    alert("Désolé, vous n'avez pas trouvé la bonne combinaison");
   }
+}
+
+//function for updating try number
+function updateTry() {
+  const tryHtml = document.querySelector(".status");
+  tryHtml.innerText = "";
+  tryHtml.innerText = `Tentative ${currentAttempt} / ${maxTries}`;
 }
 const cancelBtn = document.getElementById("cancelBtn");
 cancelBtn.addEventListener('click', event => {
-  cancel();
+  reset();
 });
 const submitBtn = document.getElementById("submitBtn");
 submitBtn.addEventListener('click', event => {
