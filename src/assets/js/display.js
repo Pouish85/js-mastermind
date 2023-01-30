@@ -69,6 +69,6 @@ export function boardCreation (colorsList, maxTries, currentAttempt, hiddenCombi
     }
     colorsButtonCreation(colorsList);
     attemptsRowsCreation(maxTries, currentAttempt);
-    hiddenCombinationRow(colorsList, hiddenCombinationLength);
+    hiddenCombinationRow(hiddenCombinationLength);
     currentAttemptDisp(currentAttempt, hiddenCombinationLength);
 }

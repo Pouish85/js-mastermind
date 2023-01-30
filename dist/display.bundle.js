@@ -106,7 +106,7 @@ function boardCreation(colorsList, maxTries, currentAttempt, hiddenCombinationLe
   }
   colorsButtonCreation(colorsList);
   attemptsRowsCreation(maxTries, currentAttempt);
-  hiddenCombinationRow(colorsList, hiddenCombinationLength);
+  hiddenCombinationRow(hiddenCombinationLength);
   currentAttemptDisp(currentAttempt, hiddenCombinationLength);
 }
 /******/ })()
