@@ -68,10 +68,10 @@ function boardCreation(colorsList, maxTries, currentAttempt, hiddenCombinationLe
                     <buton class="colors three" id="white"></buton>
                     <buton class="colors four" id="white"></buton>
                     <div class="results${value} square">
-                        <button class="resultsColors one" id=""></button>
-                        <button class="resultsColors two" id=""></button>
-                        <button class="resultsColors three" id=""></button>
-                        <button class="resultsColors four" id=""></button>
+                        <button class="resultsColors one" id="transparent"></button>
+                        <button class="resultsColors two" id="transparent"></button>
+                        <button class="resultsColors three" id="transparent"></button>
+                        <button class="resultsColors four" id="transparent"></button>
                     </div>
                 </div>
             

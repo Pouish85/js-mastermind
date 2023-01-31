@@ -10,6 +10,8 @@ let currentAttempt = 1;
 const hiddenCombinationLength = 4;
 let combination = [];
 const randomChoice = [];
+let rightPlace = 0;
+let wrongPlace = 0;
 
 //hidden combination creation
 function hiddenCombination() {
@@ -17,7 +19,6 @@ function hiddenCombination() {
     for (let i = 0; i < hiddenCombinationLength; i++) {
         let randomOneChoice = colors[Math.floor(Math.random() * colors.length)];
         randomChoice.push(randomOneChoice);
-        
     }
     console.log(randomChoice);
 }
@@ -47,7 +48,7 @@ function attempt () {
         })
     }
 
-    //display of the current combination in th the currentAttempt row
+    //display of the current combination in the currentAttempt row
     function currentAttempt() {
         let combinationHTML = document.querySelector("#currentAttempt");
         if (combination.length == 1) {
@@ -89,13 +90,15 @@ function submit() {
         alert(`Félicitation vous avez trouvé la bonne combinaison en ${currentAttempt} tentative${currentAttempt >= 2 ? "s" : ""}`)
     } else if (currentAttempt < maxTries) {
         savePreviousAttempts();
-        alert("Ce n'est pas la bonne combinaison, recommencez!")
+        compare();
+        alert(`Ce n'est pas la bonne combinaison, vous avez ${rightPlace >=1 ? `${rightPlace} couleur${ rightPlace >=2 ? "s" : ""} bien placée${ rightPlace >=2 ? "s" : ""}` : ""} ${rightPlace >=1 && wrongPlace >=1 ? "et " : ""}${wrongPlace >=1 ? `${wrongPlace} couleur${ wrongPlace >=2 ? "s" : ""} mal placée${ wrongPlace >=2 ? "s" : ""}`: ""}`)
         reset();
         currentAttempt += 1;
         updateTry();
     } else {
         combinationReveal();
         savePreviousAttempts();
+        compare();
         alert("Désolé c'est perdu, vous n'avez pas trouvé la bonne combinaison")
     }
 }
@@ -104,6 +107,40 @@ function submit() {
 function updateTry () {
     const tryHtml = document.querySelector(".status");
     tryHtml.innerText = `Tentative ${currentAttempt} / ${maxTries}`
+}
+
+//function that compare hiddenCombination and current for giving hints to user
+function compare () {
+    const checkCombination = [...combination];
+    console.log(checkCombination);
+    rightPlace = 0;
+    wrongPlace = 0;
+
+    for (let i = 0; i < randomChoice.length; i++) {
+        if (randomChoice[i] === checkCombination[i]) {
+            checkCombination.splice(i, 1, "X");
+            rightPlace++;
+        } else if (checkCombination.includes(randomChoice[i])) {
+            wrongPlace++;
+        }
+    }
+
+    const hints = [];
+    for (let i = 0; i < rightPlace; i++) {
+        hints.push("black");
+    };
+    for (let i = 0; i < wrongPlace; i++) {
+        hints.push("white")
+    };
+    for (let i = hints.length; i < hiddenCombinationLength; i++) {
+        hints.push("transparent");
+    }
+
+    const resultsHint = document.querySelector(`.results${currentAttempt}`);
+    resultsHint.children[0].id = hints[0];
+    resultsHint.children[1].id = hints[1];
+    resultsHint.children[2].id = hints[2];
+    resultsHint.children[3].id = hints[3];
 }
 
 const cancelBtn = document.getElementById("cancelBtn");
@@ -118,4 +155,3 @@ submitBtn.addEventListener('click', () => {
 
 hiddenCombination();
 boardCreation(colorsList, maxTries, currentAttempt, hiddenCombinationLength)
-attempt();
