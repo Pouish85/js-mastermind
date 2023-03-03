@@ -1,4 +1,3 @@
-
 export function boardCreation (colorsList, maxTries, currentAttempt, hiddenCombinationLength) {
     // //function for generating and displaying colors buttons
     function colorsButtonCreation(colorsList) {

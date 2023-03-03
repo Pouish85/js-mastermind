@@ -673,7 +673,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 //Array of colors that will be used for the game
 const colorsList = [{
   name: "yellow"
@@ -692,7 +691,7 @@ const maxTries = 10;
 let currentAttempt = 1;
 const hiddenCombinationLength = 4;
 let combination = [];
-const randomChoice = [];
+let randomChoice = [];
 let rightPlace = 0;
 let wrongPlace = 0;
 
@@ -703,7 +702,6 @@ function hiddenCombination() {
     let randomOneChoice = colors[Math.floor(Math.random() * colors.length)];
     randomChoice.push(randomOneChoice);
   }
-  console.log(randomChoice);
 }
 
 //function for revealing the hidden combination at the end game
@@ -726,7 +724,6 @@ function attempt() {
       } else {
         alert(`Vous ne pouvez pas avoir une combinaison supperieure à ${hiddenCombinationLength} couleurs!`);
       }
-      console.log(combination);
     });
   }
 
@@ -773,7 +770,7 @@ function submit() {
   } else if (currentAttempt < maxTries) {
     savePreviousAttempts();
     compare();
-    alert(`Ce n'est pas la bonne combinaison, vous avez ${rightPlace >= 1 ? `${rightPlace} couleur${rightPlace >= 2 ? "s" : ""} bien placée${rightPlace >= 2 ? "s" : ""}` : ""} ${rightPlace >= 1 && wrongPlace >= 1 ? "et " : ""}${wrongPlace >= 1 ? `${wrongPlace} couleur${wrongPlace >= 2 ? "s" : ""} mal placée${wrongPlace >= 2 ? "s" : ""}` : ""}`);
+    alert(`Ce n'est pas la bonne combinaison${rightPlace >= 1 | wrongPlace >= 1 ? `, vous avez ${rightPlace >= 1 ? `${rightPlace} couleur${rightPlace >= 2 ? "s" : ""} bien placée${rightPlace >= 2 ? "s" : ""}` : ""} ${rightPlace >= 1 && wrongPlace >= 1 ? "et " : ""}${wrongPlace >= 1 ? `${wrongPlace} couleur${wrongPlace >= 2 ? "s" : ""} mal placée${wrongPlace >= 2 ? "s" : ""}` : ""}` : "."}`);
     reset();
     currentAttempt += 1;
     updateTry();
@@ -793,8 +790,7 @@ function updateTry() {
 
 //function that compare hiddenCombination and current for giving hints to user
 function compare() {
-  const checkCombination = [...combination];
-  console.log(checkCombination);
+  let checkCombination = [...combination];
   rightPlace = 0;
   wrongPlace = 0;
   for (let i = 0; i < randomChoice.length; i++) {
@@ -802,6 +798,7 @@ function compare() {
       checkCombination.splice(i, 1, "X");
       rightPlace++;
     } else if (checkCombination.includes(randomChoice[i])) {
+      // checkCombination.splice(i, 1, "Y");
       wrongPlace++;
     }
   }
@@ -823,16 +820,27 @@ function compare() {
   resultsHint.children[2].id = hints[2];
   resultsHint.children[3].id = hints[3];
 }
+
+//cancel Button
 const cancelBtn = document.getElementById("cancelBtn");
 cancelBtn.addEventListener('click', () => {
   reset();
 });
+
+//submit button
 const submitBtn = document.getElementById("submitBtn");
 submitBtn.addEventListener('click', () => {
   submit();
 });
-hiddenCombination();
-(0,_display_js__WEBPACK_IMPORTED_MODULE_1__.boardCreation)(colorsList, maxTries, currentAttempt, hiddenCombinationLength);
+
+//function for starting the game
+function game() {
+  (0,_display_js__WEBPACK_IMPORTED_MODULE_1__.boardCreation)(colorsList, maxTries, currentAttempt, hiddenCombinationLength);
+  hiddenCombination();
+  attempt();
+}
+;
+game();
 })();
 
 /******/ })()
