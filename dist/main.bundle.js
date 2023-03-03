@@ -722,6 +722,7 @@ const colorsList = [{
 }, {
   name: "purple"
 }];
+const screen = document.getElementById("screen");
 const maxTries = 10;
 let currentAttempt = 1;
 const hiddenCombinationLength = 4;
@@ -757,7 +758,8 @@ function attempt() {
         combination.push(btn.id);
         currentAttempt(combination);
       } else {
-        alert(`Vous ne pouvez pas avoir une combinaison supperieure à ${hiddenCombinationLength} couleurs!`);
+        screen.innerText = "";
+        screen.innerText = `Vous ne pouvez pas avoir une combinaison supperieure à ${hiddenCombinationLength} couleurs!`;
       }
     });
   }
@@ -801,11 +803,12 @@ function submit() {
   if (combination.toString() === randomChoice.toString()) {
     savePreviousAttempts();
     combinationReveal();
-    alert(`Félicitation vous avez trouvé la bonne combinaison en ${currentAttempt} tentative${currentAttempt >= 2 ? "s" : ""}`);
+    screen.innerText = "";
+    screen.innerText = `Félicitation vous avez trouvé la bonne combinaison en ${currentAttempt} tentative${currentAttempt >= 2 ? "s" : ""}`;
   } else if (currentAttempt < maxTries) {
     savePreviousAttempts();
     compare();
-    alert(`Ce n'est pas la bonne combinaison${rightPlace >= 1 | wrongPlace >= 1 ? `, vous avez ${rightPlace >= 1 ? `${rightPlace} couleur${rightPlace >= 2 ? "s" : ""} bien placée${rightPlace >= 2 ? "s" : ""}` : ""} ${rightPlace >= 1 && wrongPlace >= 1 ? "et " : ""}${wrongPlace >= 1 ? `${wrongPlace} couleur${wrongPlace >= 2 ? "s" : ""} mal placée${wrongPlace >= 2 ? "s" : ""}` : ""}` : "."}`);
+    screen.innerText = `Ce n'est pas la bonne combinaison${rightPlace >= 1 | wrongPlace >= 1 ? `, vous avez ${rightPlace >= 1 ? `${rightPlace} couleur${rightPlace >= 2 ? "s" : ""} bien placée${rightPlace >= 2 ? "s" : ""}` : ""} ${rightPlace >= 1 && wrongPlace >= 1 ? "et " : ""}${wrongPlace >= 1 ? `${wrongPlace} couleur${wrongPlace >= 2 ? "s" : ""} mal placée${wrongPlace >= 2 ? "s" : ""}` : ""}` : "."}`;
     reset();
     currentAttempt += 1;
     updateTry();
@@ -813,7 +816,7 @@ function submit() {
     combinationReveal();
     savePreviousAttempts();
     compare();
-    alert("Désolé c'est perdu, vous n'avez pas trouvé la bonne combinaison");
+    screen.innerText = "Désolé c'est perdu, vous n'avez pas trouvé la bonne combinaison";
   }
 }
 
@@ -833,7 +836,6 @@ function compare() {
       checkCombination.splice(i, 1, "X");
       rightPlace++;
     } else if (checkCombination.includes(randomChoice[i])) {
-      // checkCombination.splice(i, 1, "Y");
       wrongPlace++;
     }
   }
