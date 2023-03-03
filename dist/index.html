@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mastermind</title>
-<script defer src="main.bundle.js"></script><script defer src="display.bundle.js"></script></head>
+<script defer src="main.bundle.js"></script><script defer src="display.bundle.js"></script><script defer src="screen.bundle.js"></script></head>
 <body>
     <div class="gameContainer">
         <h1>Mastermind</h1>
@@ -21,6 +21,24 @@
         <div class="btn">
             <button id="cancelBtn">Annuler</button>
             <button id="submitBtn">Valider</button>
+        </div>
+    </div>
+    <div class="screenBoard">
+        <div class="infoScreen">
+            <h1 class="infos crt">Infos:</h1>
+            <h2 class="text crt" id="screen"></h2>
+        </div>
+        <div class="rulesPanel">
+            <h1></h1>
+            <h3></h3>
+            <p></p>
+            <h3></h3>
+            <p></p>
+            <h3></h3>
+            <p class="hint"></p>
+            <button class="resultsColors clueToken1" id="black"></button>
+            <button class="resultsColors clueToken2" id="white"></button>
+            <button class="newGame" onClick="window.location.reload();">Nouvelle partie</button>
         </div>
     </div>
 </body>

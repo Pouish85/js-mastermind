@@ -1,5 +1,6 @@
 import '../styles/index.scss';
 import { boardCreation } from './display.js';
+import { screenBoard } from './screenBoard';
 
 //Array of colors that will be used for the game
 const colorsList = [ {name: "yellow"}, {name: "blue"}, {name: "red"}, {name: "green"}, {name: "orange"}, {name: "purple"}];
@@ -154,7 +155,8 @@ submitBtn.addEventListener('click', () => {
 
 //function for starting the game
 function game () {
-    boardCreation(colorsList, maxTries, currentAttempt, hiddenCombinationLength)
+    boardCreation(colorsList, maxTries, currentAttempt, hiddenCombinationLength);
+    screenBoard();
     hiddenCombination();
     attempt();
 };

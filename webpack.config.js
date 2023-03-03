@@ -6,7 +6,8 @@ module.exports = {
     // Point d'entree
     entry: {
         main: path.join(__dirname, "./src/assets/js/index.js"),
-        display: path.join(__dirname, "./src/assets/js/display.js")
+        display: path.join(__dirname, "./src/assets/js/display.js"),
+        screen: path.join(__dirname, "./src/assets/js/screenBoard.js"),
     },
     // Point de sortie
     output: {
@@ -40,7 +41,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.resolve(__dirname, "src/index.html"),
-            chunk:["main", "display"]
+            chunk:["main", "display", "screen"]
         })
     ],
     stats: "minimal",

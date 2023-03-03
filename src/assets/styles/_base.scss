@@ -1,19 +1,15 @@
 @import './mixins';
 
 body {
-
     @include flex;
-
 }
 
 .row {
-    
     margin-bottom: 10px;
     padding-top: 8px;
     border-top: 1px solid white;
 
     @include flex($justify: space-between);
-
 }
 
 .colors {
@@ -23,39 +19,8 @@ body {
     margin-right: 15px;
 }
 
-#yellow {
-    background-color: yellow;
-}
-
-#blue {
-    background-color: blue;
-}
-
-#red {
-    background-color: red;
-}
-
-#green {
-    background-color: green;
-}
-
-#orange {
-    background-color: orangered;
-}
-
-#purple {
-    background-color: purple;
-}
-
-#white {
-    background-color: white;
-}
-
-#black {
-    background-color: black;
-    color: white;
-}
-
-#transparent {
-    background-color: transparent;
+.resultsColors {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
 }
